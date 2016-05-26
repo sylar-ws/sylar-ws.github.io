@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Sylar's blog</title><link href="http://sylar-ws.github.io/" rel="alternate"></link><link href="http://sylar-ws.github.io/feeds/ji-zhu.atom.xml" rel="self"></link><id>http://sylar-ws.github.io/</id><updated>2016-05-16T00:00:00+02:00</updated><entry><title>Pelican搭建博客</title><link href="http://sylar-ws.github.io/pelicanda-jian-bo-ke.html" rel="alternate"></link><published>2016-05-16T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:pelicanda-jian-bo-ke.html</id><summary type="html">&lt;h2&gt;0、环境说明&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Sylar's blog</title><link href="http://sylar-ws.github.io/" rel="alternate"></link><link href="http://sylar-ws.github.io/feeds/web.atom.xml" rel="self"></link><id>http://sylar-ws.github.io/</id><updated>2016-05-26T00:00:00+02:00</updated><entry><title>Pelican搭建博客——第二篇</title><link href="http://sylar-ws.github.io/pelican-2.html" rel="alternate"></link><published>2016-05-26T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-26:pelican-2.html</id><summary type="html">
+&lt;p&gt;0、本篇主要内容&lt;/p&gt;
+&lt;h2 id="1elegent"&gt;1、elegent 主题相关设置&lt;/h2&gt;
+&lt;h3 id="11-plugin"&gt;1.1 安装依赖plugin&lt;/h3&gt;
+&lt;p&gt;使用plugin：在github&lt;a href="https://github.com/getpelican/pelican-plugins"&gt;pelican-plugins&lt;/a&gt;下载需要的plugin，放到任意路径。在pelicanconf.py中配置路径&lt;code&gt;PLUGIN_PATHS = ["**\Pelican\plugin",]&lt;/code&gt;, 使用&lt;code&gt;PLUGINS = ['sitemap', 'extract_toc', 'tipue_search']&lt;/code&gt;指定要加载的plugin。&lt;/p&gt;
+&lt;h4 id="111-sitemap"&gt;1.1.1 设置sitemap&lt;/h4&gt;
+&lt;p&gt;使用readme.md中的默认设置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SITEMAP = {
+        'format': 'xml',
+        'priorities': {
+            'articles': 0.5,
+            'indexes': 0.5,
+            'pages': 0.5
+        },
+        'changefreqs': {
+            'articles': 'monthly',
+            'indexes': 'daily',
+            'pages': 'monthly'
+        }
+    }
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id="112-tipue-search"&gt;1.1.2 设置Tipue Search&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果你的搜索功能也有undefine问题，可以按一下方法解决。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;找到Tipue Search插件的源文件tipue_search.py，在函数&lt;code&gt;create_json_node&lt;/code&gt;和函数&lt;code&gt;create_tpage_node&lt;/code&gt;中修改：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node = {'title': page_title,
+        'text': page_text,
+        'tags': page_category,
+        'url': page_url,
+        'loc': page_url}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;原因可能是实现搜索的js文件中将loc作为关键字获取文章链接，但是tipue_search.py并没有在生成的json文件中为文章指定loc字段。&lt;/p&gt;
+&lt;h3 id="12"&gt;1.2 设置首页&lt;/h3&gt;
+&lt;h2 id="2"&gt;2、评论模块&lt;/h2&gt;
+&lt;h2 id="3"&gt;3、域名设置&lt;/h2&gt;</summary><category term="Pelican"></category><category term="blog"></category></entry><entry><title>Pelican搭建博客——第一篇</title><link href="http://sylar-ws.github.io/pelican-1.html" rel="alternate"></link><published>2016-05-26T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:pelican-1.html</id><summary type="html">
+&lt;h2 id="0"&gt;0、环境说明&lt;/h2&gt;
 &lt;p&gt;环境：python 2.7
 系统：windows 10 64bit&lt;/p&gt;
-&lt;h2&gt;1、安装pelican&lt;/h2&gt;
+&lt;h2 id="1pelican"&gt;1、安装pelican&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;pip install pelican markdown&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;安装pelican遇到问题 “UnicodeDecodeError”，参考 笔记 &lt;strong&gt;pip install UnicodeDecodeError&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;2、pelican quickstart&lt;/h2&gt;
-&lt;p&gt;2.1 创建测试目录 test&lt;br /&gt;
+&lt;h2 id="2pelican-quickstart"&gt;2、pelican quickstart&lt;/h2&gt;
+&lt;p&gt;2.1 创建测试目录 test&lt;br/&gt;
 &lt;code&gt;mkdir test&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;2.2 执行pelican-quickstart&lt;br /&gt;
-&lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;br /&gt;
+&lt;p&gt;2.2 执行pelican-quickstart&lt;br/&gt;
+&lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;br/&gt;
 test 目录的结构&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;test/
 ├── content              # 存放输入的源文件
@@ -22,30 +60,26 @@ test 目录的结构&lt;/p&gt;
 ├── pelicanconf.py       # 主配置文件
 └── publishconf.py       # 发布时使用的配置文件
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;2.3 在content目录下添加 test.md 文章,&lt;br /&gt;
+&lt;p&gt;2.3 在content目录下添加 test.md 文章,&lt;br/&gt;
 文章开头必须添加一下内容:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;My&lt;/span&gt; &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;Blog&lt;/span&gt;
 &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2016&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;
 &lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;2.4 生成Blog站点&lt;br /&gt;
-&lt;code&gt;pelican content&lt;/code&gt;&lt;br /&gt;
+&lt;p&gt;2.4 生成Blog站点&lt;br/&gt;
+&lt;code&gt;pelican content&lt;/code&gt;&lt;br/&gt;
 output 目录中会生成相关内容&lt;/p&gt;
 &lt;p&gt;2.5 本地预览
 &lt;code&gt;develop_server start 8000&lt;/code&gt;
 打开浏览器输入地址：http://localhost:8000/ 即可访问.&lt;/p&gt;
-&lt;h2&gt;3、进一步探索&lt;/h2&gt;
-&lt;h3&gt;3.1 content/pages&lt;/h3&gt;
+&lt;h2 id="3"&gt;3、进一步探索&lt;/h2&gt;
+&lt;h3 id="31-contentpages"&gt;3.1 content/pages&lt;/h3&gt;
 &lt;p&gt;该目录下存储静态页面，如About、Contact，默认会在导航栏中显示，通过设置&lt;code&gt;DISPLAY_PAGES_ON_MENU&lt;/code&gt;不显示。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If you want to exclude any pages from being linked to or listed in the menu then add a status: hidden attribute to its metadata. This is useful for things like making error pages that fit the generated theme of your site.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;3.2 引用站内内容&lt;/h3&gt;
-&lt;h4&gt;3.2.1 引用站内页面&lt;/h4&gt;
+&lt;h3 id="32"&gt;3.2 引用站内内容&lt;/h3&gt;
+&lt;h4 id="321"&gt;3.2.1 引用站内页面&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Linking to internal content&lt;/strong&gt; This makes it easier to link from the current post to other content that may be sitting alongside that post (instead of having to determine where the other content will be placed after site generation).&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -59,8 +93,6 @@ output 目录中会生成相关内容&lt;/p&gt;
 │       └── about.md
 └── pelican.conf.py
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;article2 引用 article1，&lt;code&gt;article2.md&lt;/code&gt;的内容&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="n"&gt;article&lt;/span&gt;
 &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2012&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;01&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;02&lt;/span&gt;
@@ -70,27 +102,21 @@ output 目录中会生成相关内容&lt;/p&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="n"&gt;relative&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;]({&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;article1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rst&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="n"&gt;relative&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;]({&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;}/&lt;/span&gt;&lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;article1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rst&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;{filename} 可以理解为关键字，后接相对路径&lt;/p&gt;
-&lt;h4&gt;3.2.2 引用静态文件&lt;/h4&gt;
+&lt;h4 id="322"&gt;3.2.2 引用静态文件&lt;/h4&gt;
 &lt;p&gt;引用图片(jpg png)、普通文件(pdf txt zip)等，直接在content目录下建立相关目录&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;content/images/
 content/files/
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;引用方式与引用静态页面相似
 &lt;code&gt;![Alt Text]({filename}/images/han.jpg)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;pelicanconf.py&lt;/code&gt;中的&lt;code&gt;STATIC_PATHS&lt;/code&gt;控制哪些目录在生成时拷贝到output目录中&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;STATIC_PATHS = [&amp;#39;images&amp;#39;, &amp;#39;pdfs&amp;#39;]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;STATIC_PATHS = ['images', 'pdfs']
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;blockquote&gt;
 &lt;p&gt;默认配置中包含images，其他目录需要手动添加&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;3.2.3 使用 attach 引用静态文件&lt;/h4&gt;
+&lt;h4 id="323-attach"&gt;3.2.3 使用 attach 引用静态文件&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Starting with Pelican 3.5, static files can be “attached” to a page or article using this syntax for the link target: {attach}path/to/file This works like the {filename} syntax, but also relocates the static file into the linking document’s output directory. If the static file originates from a subdirectory beneath the linking document’s source, that relationship will be preserved on output. Otherwise, it will become a sibling of the linking document.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -105,17 +131,13 @@ content/files/
 └── downloads
     └── archive.zip
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;&lt;code&gt;pelicanconf.py&lt;/code&gt;配置内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;PATH = &amp;#39;content&amp;#39;
-STATIC_PATHS = [&amp;#39;blog&amp;#39;, &amp;#39;downloads&amp;#39;]
-ARTICLE_PATHS = [&amp;#39;blog&amp;#39;]
-ARTICLE_SAVE_AS = &amp;#39;{date:%Y}/{slug}.html&amp;#39;
-ARTICLE_URL = &amp;#39;{date:%Y}/{slug}.html&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;PATH = 'content'
+STATIC_PATHS = ['blog', 'downloads']
+ARTICLE_PATHS = ['blog']
+ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
+ARTICLE_URL = '{date:%Y}/{slug}.html'
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;&lt;code&gt;testpost.md&lt;/code&gt; 内容：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;Title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="n"&gt;Post&lt;/span&gt;
 &lt;span class="nl"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
@@ -125,8 +147,6 @@ ARTICLE_URL = &amp;#39;{date:%Y}/{slug}.html&amp;#39;
 &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Photo&lt;/span&gt;&lt;span class="p"&gt;]({&lt;/span&gt;&lt;span class="n"&gt;attach&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="n"&gt;photo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Downloadable&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;]({&lt;/span&gt;&lt;span class="n"&gt;attach&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;downloads&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;archive&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;生成后，output目录内容&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;output
 └── 2014
@@ -136,114 +156,51 @@ ARTICLE_URL = &amp;#39;{date:%Y}/{slug}.html&amp;#39;
     ├── photo.jpg
     └── test-post.html
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;如果同一个静态文件被多次 attach，这个文件的 relocate 只在这些引用中第一个被处理的时候有效，之后该文件的 attach 的处理类似 filename。
 如果这些引用位于不同的页面中，那么静态文件 relocate 后的位置将是不确定的，如果有其他站点引用这个静态文件的地址，那么随着多次 build，这些地址很可能会失效。
 因此建议只有在&lt;strong&gt;静态文件&lt;/strong&gt;只在同一个页面中引用时使用{attach}，或者多个页面时，这些页面都在同一个目录下。&lt;/p&gt;
-&lt;h4&gt;3.2.4 引用tag和categories&lt;/h4&gt;
+&lt;h4 id="324-tagcategories"&gt;3.2.4 引用tag和categories&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{tag}tagname
 {category}foobar
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;3.3 语法高亮&lt;/h3&gt;
+&lt;h3 id="33"&gt;3.3 语法高亮&lt;/h3&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;h3&gt;3.4 Publishing drafts&lt;/h3&gt;
+&lt;h3 id="34-publishing-drafts"&gt;3.4 Publishing drafts&lt;/h3&gt;
 &lt;p&gt;如果想把一片文章发布为 draft (先让朋友试看，在正式发布之前)，可以给文章的metadata添加&lt;code&gt;Status: draft&lt;/code&gt;属性，这样的文章会被放到drafts目录下，在首页或是分类查看时都是不可见的。
 如果想将所有文章默认发布为 draft，可以在配置文件中添加：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;DEFAULT_METADATA = {
-    &amp;#39;status&amp;#39;: &amp;#39;draft&amp;#39;,
+    'status': 'draft',
 }
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;这时想要正式发布一篇文章时，需要在metadata添加&lt;code&gt;Status: published&lt;/code&gt;属性。&lt;/p&gt;
-&lt;h2&gt;4、部署&lt;/h2&gt;
-&lt;h2&gt;5、修改 theme&lt;/h2&gt;
-&lt;h4&gt;5.1 pelican-themes 工具管理主题&lt;/h4&gt;
+&lt;h2 id="4github-pages"&gt;4、部署到github pages&lt;/h2&gt;
+&lt;p&gt;在publishconf.py中配置SITEURL = 'http://yoursite.github.io'
+使用make，依据个人习惯，修改一下makefile，做到一键发布即可。&lt;/p&gt;
+&lt;h2 id="5-theme"&gt;5、修改 theme&lt;/h2&gt;
+&lt;h4 id="51-pelican-themes"&gt;5.1 pelican-themes 工具管理主题&lt;/h4&gt;
 &lt;p&gt;查看当前安装的主题
 &lt;code&gt;pelican-themes -l -v&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;安装新主题,可以依次安装多个&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pelican-themes -vi ~/Dev/Python/pelican-themes/two-column\
                     ~/Dev/Python/pelican-themes/martyalchin \
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;删除主题&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pelican-themes --remove two-column
 or
 pelican-themes -r martyachin notmyidea-cmd -v
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;5.2 设置主题&lt;/h4&gt;
+&lt;h4 id="52"&gt;5.2 设置主题&lt;/h4&gt;
 &lt;p&gt;在&lt;code&gt;pelicanconf.py&lt;/code&gt;中指定&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;THEME = &amp;quot;theme&amp;quot;             //默认主题或是使用pelican-themes安装的主题
-THEME_STATIC_DIR = &amp;#39;theme&amp;#39;  //THEME_STATIC_PATHS中收集到的静态文件在output中的目录，默认为theme
-THEME_STATIC_PATHS = [&amp;#39;static&amp;#39;] //Static theme paths，主题的目录中 static文  
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;THEME = "theme"             //默认主题或是使用pelican-themes安装的主题
+THEME_STATIC_DIR = 'theme'  //THEME_STATIC_PATHS中收集到的静态文件在output中的目录，默认为theme
+THEME_STATIC_PATHS = ['static'] //Static theme paths，主题的目录中 static文  
                                 //件的目录名，会被拷贝到output下
-CSS_FILE = &amp;#39;main.css&amp;#39;       //指定想要加载css文件
+CSS_FILE = 'main.css'       //指定想要加载css文件
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;TODO:&lt;/h2&gt;
+&lt;h2 id="_1"&gt;第二篇内容预览:&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;pelican 与本地 github pages目录的结合&lt;/li&gt;
-&lt;li&gt;文章中插入图片&lt;/li&gt;
-&lt;li&gt;评论模块-disqus&lt;/li&gt;
+&lt;li&gt;elegent主题相关设置&lt;/li&gt;
+&lt;li&gt;加入评论模块-disqus&lt;/li&gt;
+&lt;li&gt;文章中图片的处理-图床选择&lt;/li&gt;
 &lt;li&gt;域名绑定&lt;/li&gt;
-&lt;li&gt;多种 生成方式的 优劣&lt;/li&gt;
-&lt;li&gt;Markdown extension 配置&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="其他"></category></entry><entry><title>提高效率</title><link href="http://sylar-ws.github.io/test.html" rel="alternate"></link><published>2016-05-16T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:test.html</id><summary type="html">&lt;h1&gt;提高学习工作效率的方法&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="总图" src="http://sylar-ws.github.io/images/productivity.png" title="Title&amp;quot; &amp;quot;width:500px;height:200px" /&gt;&lt;/p&gt;
-&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h2&gt;前言&lt;/h2&gt;
-&lt;p&gt;为了提高学习效率，通过查阅资料和长期实践，最终确定下了&lt;strong&gt;GTD+番茄工作法&lt;/strong&gt;的组合，使用GTD管理任务和目标，使用番茄工作法让自己在一段时间内专注于手头上的工作。&lt;/p&gt;
-&lt;h2&gt;GTD&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="GTD" src="http://sylar-ws.github.io/images/gtd.jpg" title="Title&amp;quot; &amp;quot;width:300px" /&gt;&lt;/p&gt;
-&lt;h4&gt;本文中GTD的定义和理念&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;GTD&lt;/strong&gt;即&lt;strong&gt;Get Things Done&lt;/strong&gt;，GTD的核心理念概括就是必须记录下来要做的事，然后整理安排并使自己一一去执行。&lt;/li&gt;
-&lt;li&gt;如果你查询过什么是GTD，那么你很可能看到了百度百科中对GTD的解释，而且很可能你被那冗长的词条吓到了，不用怕，本文所指的GTD并没那么复杂，本文的GTD简单来说就是To Do List + 四象限法 + 日历的一个组合，To Do List记录需要完成的任务，同时在To Do List中按四象限法定义四个子集，将不同的任务按照实际需求放到四个子集中，最后在将To Do List中任务的信息和完成时间同步到日历中，如果选择的工具可以全平台通用，那么几乎可以做到任何时候都可以准确的把握应该着手尽快完成的任务。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;四象限法：将任务分为重要紧急、重要不紧急、不重要紧急、不重要不紧急四类。
-&lt;img alt="" src="http://sylar-ws.github.io/images/four_d.png" title="Title&amp;quot; &amp;quot;width:350px;" /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4&gt;GTD App 推荐：&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img alt="" src="http://sylar-ws.github.io/images/wunder_list_icon.png" title="Title&amp;quot; &amp;quot;width:50px" /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;奇妙清单(wunder list)&lt;/strong&gt;：全平台&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;番茄工作法&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img alt="tomato" src="http://sylar-ws.github.io/images/tomato.png" title="Title&amp;quot; &amp;quot;width:60px;float;left" /&gt;  番茄工作法是由&lt;strong&gt;弗朗西斯科·西里洛&lt;/strong&gt;于1992年创立的一种相对于GTD更微观的时间管理方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;番茄工作法流程：选择一个待完成的任务，将番茄时间设为25分钟，专注工作，中途不允许做任何与该任务无关的事，直到番茄时钟响起，然后进行短休息5分钟，每完成4个番茄进行一次长休息15分钟。番茄时间、休息时间可以根据自己的情况调整。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;个人对番茄工作法见解：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;工作时的紧急任务，无需番茄工作法也可以沉下心来做的，就没必要用番茄工作法了，这时番茄工作法可能会切到反作用（打断思路）。比如：写代码、做设计。&lt;/li&gt;
-&lt;li&gt;逼自己看书时或是做其他不情愿做的事时，番茄工作法有奇效。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;番茄工作法 App 推荐：&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img alt="" src="http://sylar-ws.github.io/images/发条番茄.png" title="Title&amp;quot; &amp;quot;width:60px" /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;android：发条番茄&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;img alt="" src="http://sylar-ws.github.io/images/潮汐.jpg" title="Title&amp;quot; &amp;quot;width:60px" /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ios：潮汐&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="test"></category></entry></feed>
+&lt;/ul&gt;</summary><category term="Pelican"></category><category term="blog"></category></entry></feed>

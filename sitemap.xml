@@ -5,41 +5,48 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://sylar-ws.github.io/</loc>
-<lastmod>2016-05-26T19:22:41-00:00</lastmod>
+<lastmod>2016-05-26T19:30:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://sylar-ws.github.io/archives.html</loc>
-<lastmod>2016-05-26T19:22:41-00:00</lastmod>
+<lastmod>2016-05-26T19:30:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://sylar-ws.github.io/tags.html</loc>
-<lastmod>2016-05-26T19:22:41-00:00</lastmod>
+<lastmod>2016-05-26T19:30:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://sylar-ws.github.io/categories.html</loc>
-<lastmod>2016-05-26T19:22:41-00:00</lastmod>
+<lastmod>2016-05-26T19:30:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://sylar-ws.github.io/pelicanda-jian-bo-ke.html</loc>
-<lastmod>2016-05-16T00:00:00+02:00</lastmod>
+<loc>http://sylar-ws.github.io/pelican-2.html</loc>
+<lastmod>2016-05-26T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://sylar-ws.github.io/test.html</loc>
+<loc>http://sylar-ws.github.io/pelican-1.html</loc>
+<lastmod>2016-05-26T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://sylar-ws.github.io/tigaoxiaolv.html</loc>
 <lastmod>2016-05-16T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>

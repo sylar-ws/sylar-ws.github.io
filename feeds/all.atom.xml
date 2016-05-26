@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Sylar's blog</title><link href="http://sylar-ws.github.io/" rel="alternate"></link><link href="http://sylar-ws.github.io/feeds/all.atom.xml" rel="self"></link><id>http://sylar-ws.github.io/</id><updated>2016-05-16T00:00:00+02:00</updated><entry><title>Pelican搭建博客</title><link href="http://sylar-ws.github.io/pelicanda-jian-bo-ke.html" rel="alternate"></link><published>2016-05-16T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:pelicanda-jian-bo-ke.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Sylar's blog</title><link href="http://sylar-ws.github.io/" rel="alternate"></link><link href="http://sylar-ws.github.io/feeds/all.atom.xml" rel="self"></link><id>http://sylar-ws.github.io/</id><updated>2016-05-26T00:00:00+02:00</updated><entry><title>Pelican搭建博客——第二篇</title><link href="http://sylar-ws.github.io/pelican-2.html" rel="alternate"></link><published>2016-05-26T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-26:pelican-2.html</id><summary type="html">
+&lt;p&gt;0、本篇主要内容&lt;/p&gt;
+&lt;h2 id="1elegent"&gt;1、elegent 主题相关设置&lt;/h2&gt;
+&lt;h3 id="11-plugin"&gt;1.1 安装依赖plugin&lt;/h3&gt;
+&lt;p&gt;使用plugin：在github&lt;a href="https://github.com/getpelican/pelican-plugins"&gt;pelican-plugins&lt;/a&gt;下载需要的plugin，放到任意路径。在pelicanconf.py中配置路径&lt;code&gt;PLUGIN_PATHS = ["**\Pelican\plugin",]&lt;/code&gt;, 使用&lt;code&gt;PLUGINS = ['sitemap', 'extract_toc', 'tipue_search']&lt;/code&gt;指定要加载的plugin。&lt;/p&gt;
+&lt;h4 id="111-sitemap"&gt;1.1.1 设置sitemap&lt;/h4&gt;
+&lt;p&gt;使用readme.md中的默认设置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SITEMAP = {
+        'format': 'xml',
+        'priorities': {
+            'articles': 0.5,
+            'indexes': 0.5,
+            'pages': 0.5
+        },
+        'changefreqs': {
+            'articles': 'monthly',
+            'indexes': 'daily',
+            'pages': 'monthly'
+        }
+    }
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id="112-tipue-search"&gt;1.1.2 设置Tipue Search&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果你的搜索功能也有undefine问题，可以按一下方法解决。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;找到Tipue Search插件的源文件tipue_search.py，在函数&lt;code&gt;create_json_node&lt;/code&gt;和函数&lt;code&gt;create_tpage_node&lt;/code&gt;中修改：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;node = {'title': page_title,
+        'text': page_text,
+        'tags': page_category,
+        'url': page_url,
+        'loc': page_url}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;原因可能是实现搜索的js文件中将loc作为关键字获取文章链接，但是tipue_search.py并没有在生成的json文件中为文章指定loc字段。&lt;/p&gt;
+&lt;h3 id="12"&gt;1.2 设置首页&lt;/h3&gt;
+&lt;h2 id="2"&gt;2、评论模块&lt;/h2&gt;
+&lt;h2 id="3"&gt;3、域名设置&lt;/h2&gt;</summary><category term="Pelican"></category><category term="blog"></category></entry><entry><title>Pelican搭建博客——第一篇</title><link href="http://sylar-ws.github.io/pelican-1.html" rel="alternate"></link><published>2016-05-26T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:pelican-1.html</id><summary type="html">
 &lt;h2 id="0"&gt;0、环境说明&lt;/h2&gt;
 &lt;p&gt;环境：python 2.7
 系统：windows 10 64bit&lt;/p&gt;
@@ -136,7 +173,9 @@ ARTICLE_URL = '{date:%Y}/{slug}.html'
 }
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;这时想要正式发布一篇文章时，需要在metadata添加&lt;code&gt;Status: published&lt;/code&gt;属性。&lt;/p&gt;
-&lt;h2 id="4"&gt;4、部署&lt;/h2&gt;
+&lt;h2 id="4github-pages"&gt;4、部署到github pages&lt;/h2&gt;
+&lt;p&gt;在publishconf.py中配置SITEURL = 'http://yoursite.github.io'
+使用make，依据个人习惯，修改一下makefile，做到一键发布即可。&lt;/p&gt;
 &lt;h2 id="5-theme"&gt;5、修改 theme&lt;/h2&gt;
 &lt;h4 id="51-pelican-themes"&gt;5.1 pelican-themes 工具管理主题&lt;/h4&gt;
 &lt;p&gt;查看当前安装的主题
@@ -158,15 +197,13 @@ THEME_STATIC_PATHS = ['static'] //Static theme paths，主题的目录中 static
                                 //件的目录名，会被拷贝到output下
 CSS_FILE = 'main.css'       //指定想要加载css文件
 &lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="todo"&gt;TODO:&lt;/h2&gt;
+&lt;h2 id="_1"&gt;第二篇内容预览:&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;pelican 与本地 github pages目录的结合&lt;/li&gt;
-&lt;li&gt;文章中插入图片&lt;/li&gt;
-&lt;li&gt;评论模块-disqus&lt;/li&gt;
+&lt;li&gt;elegent主题相关设置&lt;/li&gt;
+&lt;li&gt;加入评论模块-disqus&lt;/li&gt;
+&lt;li&gt;文章中图片的处理-图床选择&lt;/li&gt;
 &lt;li&gt;域名绑定&lt;/li&gt;
-&lt;li&gt;多种 生成方式的 优劣&lt;/li&gt;
-&lt;li&gt;Markdown extension 配置&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="其他"></category></entry><entry><title>提高效率</title><link href="http://sylar-ws.github.io/test.html" rel="alternate"></link><published>2016-05-16T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:test.html</id><summary type="html">&lt;h1 id="_1"&gt;提高学习工作效率的方法&lt;/h1&gt;
+&lt;/ul&gt;</summary><category term="Pelican"></category><category term="blog"></category></entry><entry><title>提高效率</title><link href="http://sylar-ws.github.io/tigaoxiaolv.html" rel="alternate"></link><published>2016-05-16T00:00:00+02:00</published><author><name>Sylar.W</name></author><id>tag:sylar-ws.github.io,2016-05-16:tigaoxiaolv.html</id><summary type="html">&lt;h1 id="_1"&gt;提高学习工作效率的方法&lt;/h1&gt;
 &lt;p&gt;&lt;img alt="总图" src="http://sylar-ws.github.io/images/productivity.png" title='Title" "width:500px;height:200px'/&gt;&lt;/p&gt;
 
 &lt;h2 id="_2"&gt;前言&lt;/h2&gt;
@@ -217,4 +254,4 @@ CSS_FILE = 'main.css'       //指定想要加载css文件
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;ios：潮汐&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="test"></category></entry></feed>
+&lt;/ul&gt;</summary><category term="其他"></category></entry></feed>
