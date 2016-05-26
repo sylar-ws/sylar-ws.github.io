@@ -70,15 +70,15 @@
         <div class="span8 offset2 article-content">
 
             
-            <h2>0、环境说明</h2>
+            <h2 id="0">0、环境说明</h2>
 <p>环境：python 2.7
 系统：windows 10 64bit</p>
-<h2>1、安装pelican</h2>
+<h2 id="1pelican">1、安装pelican</h2>
 <p><code>pip install pelican markdown</code></p>
 <blockquote>
 <p>安装pelican遇到问题 “UnicodeDecodeError”，参考 笔记 <strong>pip install UnicodeDecodeError</strong></p>
 </blockquote>
-<h2>2、pelican quickstart</h2>
+<h2 id="2pelican-quickstart">2、pelican quickstart</h2>
 <p>2.1 创建测试目录 test<br />
 <code>mkdir test</code></p>
 <p>2.2 执行pelican-quickstart<br />
@@ -109,14 +109,14 @@ output 目录中会生成相关内容</p>
 <p>2.5 本地预览
 <code>develop_server start 8000</code>
 打开浏览器输入地址：http://localhost:8000/ 即可访问.</p>
-<h2>3、进一步探索</h2>
-<h3>3.1 content/pages</h3>
+<h2 id="3">3、进一步探索</h2>
+<h3 id="31-contentpages">3.1 content/pages</h3>
 <p>该目录下存储静态页面，如About、Contact，默认会在导航栏中显示，通过设置<code>DISPLAY_PAGES_ON_MENU</code>不显示。</p>
 <blockquote>
 <p>If you want to exclude any pages from being linked to or listed in the menu then add a status: hidden attribute to its metadata. This is useful for things like making error pages that fit the generated theme of your site.</p>
 </blockquote>
-<h3>3.2 引用站内内容</h3>
-<h4>3.2.1 引用站内页面</h4>
+<h3 id="32">3.2 引用站内内容</h3>
+<h4 id="321">3.2.1 引用站内页面</h4>
 <blockquote>
 <p><strong>Linking to internal content</strong> This makes it easier to link from the current post to other content that may be sitting alongside that post (instead of having to determine where the other content will be placed after site generation).</p>
 </blockquote>
@@ -144,7 +144,7 @@ output 目录中会生成相关内容</p>
 
 
 <p>{filename} 可以理解为关键字，后接相对路径</p>
-<h4>3.2.2 引用静态文件</h4>
+<h4 id="322">3.2.2 引用静态文件</h4>
 <p>引用图片(jpg png)、普通文件(pdf txt zip)等，直接在content目录下建立相关目录</p>
 <div class="highlight"><pre><span></span>content/images/
 content/files/
@@ -161,7 +161,7 @@ content/files/
 <blockquote>
 <p>默认配置中包含images，其他目录需要手动添加</p>
 </blockquote>
-<h4>3.2.3 使用 attach 引用静态文件</h4>
+<h4 id="323-attach">3.2.3 使用 attach 引用静态文件</h4>
 <blockquote>
 <p>Starting with Pelican 3.5, static files can be “attached” to a page or article using this syntax for the link target: {attach}path/to/file This works like the {filename} syntax, but also relocates the static file into the linking document’s output directory. If the static file originates from a subdirectory beneath the linking document’s source, that relationship will be preserved on output. Otherwise, it will become a sibling of the linking document.</p>
 </blockquote>
@@ -212,15 +212,15 @@ ARTICLE_URL = &#39;{date:%Y}/{slug}.html&#39;
 <p>如果同一个静态文件被多次 attach，这个文件的 relocate 只在这些引用中第一个被处理的时候有效，之后该文件的 attach 的处理类似 filename。
 如果这些引用位于不同的页面中，那么静态文件 relocate 后的位置将是不确定的，如果有其他站点引用这个静态文件的地址，那么随着多次 build，这些地址很可能会失效。
 因此建议只有在<strong>静态文件</strong>只在同一个页面中引用时使用{attach}，或者多个页面时，这些页面都在同一个目录下。</p>
-<h4>3.2.4 引用tag和categories</h4>
+<h4 id="324-tagcategories">3.2.4 引用tag和categories</h4>
 <div class="highlight"><pre><span></span>{tag}tagname
 {category}foobar
 </pre></div>
 
 
-<h3>3.3 语法高亮</h3>
+<h3 id="33">3.3 语法高亮</h3>
 <p>TODO</p>
-<h3>3.4 Publishing drafts</h3>
+<h3 id="34-publishing-drafts">3.4 Publishing drafts</h3>
 <p>如果想把一片文章发布为 draft (先让朋友试看，在正式发布之前)，可以给文章的metadata添加<code>Status: draft</code>属性，这样的文章会被放到drafts目录下，在首页或是分类查看时都是不可见的。
 如果想将所有文章默认发布为 draft，可以在配置文件中添加：</p>
 <div class="highlight"><pre><span></span>DEFAULT_METADATA = {
@@ -230,9 +230,9 @@ ARTICLE_URL = &#39;{date:%Y}/{slug}.html&#39;
 
 
 <p>这时想要正式发布一篇文章时，需要在metadata添加<code>Status: published</code>属性。</p>
-<h2>4、部署</h2>
-<h2>5、修改 theme</h2>
-<h4>5.1 pelican-themes 工具管理主题</h4>
+<h2 id="4">4、部署</h2>
+<h2 id="5-theme">5、修改 theme</h2>
+<h4 id="51-pelican-themes">5.1 pelican-themes 工具管理主题</h4>
 <p>查看当前安装的主题
 <code>pelican-themes -l -v</code></p>
 <p>安装新主题,可以依次安装多个</p>
@@ -248,7 +248,7 @@ pelican-themes -r martyachin notmyidea-cmd -v
 </pre></div>
 
 
-<h4>5.2 设置主题</h4>
+<h4 id="52">5.2 设置主题</h4>
 <p>在<code>pelicanconf.py</code>中指定</p>
 <div class="highlight"><pre><span></span>THEME = &quot;theme&quot;             //默认主题或是使用pelican-themes安装的主题
 THEME_STATIC_DIR = &#39;theme&#39;  //THEME_STATIC_PATHS中收集到的静态文件在output中的目录，默认为theme
@@ -258,7 +258,7 @@ CSS_FILE = &#39;main.css&#39;       //指定想要加载css文件
 </pre></div>
 
 
-<h2>TODO:</h2>
+<h2 id="todo">TODO:</h2>
 <ul>
 <li>pelican 与本地 github pages目录的结合</li>
 <li>文章中插入图片</li>
